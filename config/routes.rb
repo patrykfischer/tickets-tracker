@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index, :update], param: :user_id do
+  resources :users, only: [:index, :update, :create], param: :user_id do
     member do
       get 'assigned', to: 'users#assigned'
       get 'own',      to: 'users#own'

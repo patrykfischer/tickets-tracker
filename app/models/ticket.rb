@@ -1,6 +1,6 @@
 class Ticket < ActiveRecord::Base
-  belongs_to :owner, class_name: 'User', foreign_key: :owner_id, required: false
-  belongs_to :assigned_to, class_name: 'User', foreign_key: :assigned_to_id, required: false
+  belongs_to :owner, class_name: 'User', required: false
+  belongs_to :assigned_to, class_name: 'User', required: false
 
   state_machine :status, initial: :open do
     event :start do

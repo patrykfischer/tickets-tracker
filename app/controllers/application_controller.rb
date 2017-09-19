@@ -3,8 +3,7 @@ class ApplicationController < ActionController::Base
   skip_before_filter :verify_authenticity_token
 
   def user
-    id = params[:user_id] || params[:id]
-    current_user ||= User.find(id)
+    @user ||= User.find(params[:user_id])
   rescue ActiveRecord::RecordNotFound
     raise UserNotFound
   end

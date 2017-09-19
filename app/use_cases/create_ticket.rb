@@ -5,12 +5,14 @@ class CreateTicket
         :create,
         :send_message
 
-  def initialize(notification_service = Notification)
+  def initialize(notification_service = Notification,
+                 ticket_form = TicketForm)
     @notification_service = notification_service
+    @ticket_form = ticket_form
   end
 
   def validate(params)
-    form = TicketForm.new(Ticket.new)
+    form = ticket_form.new(Ticket.new)
     if form.validate params
       params[:ticket] = form.sync
       continue params
@@ -32,5 +34,6 @@ class CreateTicket
 
   private
 
-  attr_accessor :notification_service
+  attr_accessor :notification_service,
+                :ticket_form
 end

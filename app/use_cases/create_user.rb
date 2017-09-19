@@ -6,12 +6,14 @@ class CreateUser
         :create,
         :send_welcome_message
 
-  def initialize(notification_service = Notification)
+  def initialize(notification_service = Notification,
+                 user_form = UserForm)
     @notification_service = notification_service
+    @user_form = user_form
   end
 
   def validate(params)
-    form = UserForm.new(User.new)
+    form = @user_form.new(User.new)
     if form.validate(params)
       params[:user] = form.sync
       continue params
@@ -37,5 +39,5 @@ class CreateUser
 
   private
 
-  attr_accessor :notification_service
+  attr_accessor :notification_service, :user_form
 end

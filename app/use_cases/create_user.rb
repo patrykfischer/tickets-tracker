@@ -23,7 +23,7 @@ class CreateUser
   end
 
   def check_email_uniq(params)
-    return continue params unless User.find_by(email: params[:user].email).present?
+    return continue params unless User.where(email: params[:user].email).any?
     fail :email_not_available, error: 'EMAIL_NOT_AVAILABLE'
   end
 
